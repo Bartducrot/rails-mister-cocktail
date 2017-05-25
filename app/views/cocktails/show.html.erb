@@ -1,2 +1,16 @@
-<h1>Cocktails#show</h1>
-<p>Find me in app/views/cocktails/show.html.erb</p>
+
+
+<h1><%= @cocktail.name %> - <%= link_to "edit the name of this cocktail", edit_cocktail_path %></h1>
+<% @cocktail.doses.each do |dose|%>
+  <p><%= dose.ingredient.name %> - <%= dose.description %></p>
+<% end %>
+
+
+<%= simple_form_for [@cocktail, @dose] do |f| %>
+  <%= f.input :description %>
+  <%= f.association :ingredient %>
+  <%= f.submit class: "btn btn-success" %>
+<% end %>
+
+
+<%= link_to "Back to home page", cocktails_path %>
